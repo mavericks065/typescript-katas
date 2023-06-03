@@ -1,6 +1,12 @@
 import {Account} from "./Account";
 
 
+class Transaction {
+    constructor(amount: number, date: Date) {
+    }
+}
+
+
 describe("When having an account", () => {
   it("should be able to get the current balance", () => {
     const account = new Account();
@@ -20,4 +26,17 @@ describe("When having an account", () => {
     const balance = account.getBalance();
     expect(balance).toBe(90);
   });
+    it('should be able to return the list of transactions', () => {
+        const expectedTransactions = [
+            new Transaction(100, Date.new(2023, 5, 5)),
+            new Transaction(-10, Date.new(2023, 5, 6)),
+        ];
+        const account = new Account();
+        account.deposit(100);
+        account.withdraw(10);
+
+        const transactions: Transaction[] = account.getTransactions();
+
+        expect(transactions).toEqual(expectedTransactions)
+    });
 });
