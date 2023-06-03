@@ -4,7 +4,10 @@ export class Account {
   getBalance(): number {
     return this.amount;
   }
-  deposit(amount: number) {
-    this.amount += amount;
+  deposit(depositAmt: number) {
+    this.amount += depositAmt;
+  }
+  withdraw(withdrawnAmt: number) {
+    this.amount -= withdrawnAmt;
   }
 }
