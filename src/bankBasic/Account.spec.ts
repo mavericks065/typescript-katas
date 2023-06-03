@@ -1,11 +1,4 @@
-import {Account} from "./Account";
-
-
-class Transaction {
-    constructor(amount: number, date: Date) {
-    }
-}
-
+import {Account, Transaction} from "./Account";
 
 describe("When having an account", () => {
   it("should be able to get the current balance", () => {
@@ -26,17 +19,23 @@ describe("When having an account", () => {
     const balance = account.getBalance();
     expect(balance).toBe(90);
   });
-    it('should be able to return the list of transactions', () => {
-        const expectedTransactions = [
-            new Transaction(100, Date.new(2023, 5, 5)),
-            new Transaction(-10, Date.new(2023, 5, 6)),
-        ];
-        const account = new Account();
-        account.deposit(100);
-        account.withdraw(10);
+  it('should be able to return the list of transactions', () => {
+    const expectedTransactions = [
+      new Transaction(100, new Date('2023-05-05').valueOf()),
+      new Transaction(-10, new Date('2023-05-06').valueOf()),
+    ];
+    jest.spyOn(global.Date, 'now').mockImplementationOnce(() =>
+      new Date('2023-05-05').valueOf()
+    ).mockImplementationOnce(() =>
+      new Date('2023-05-06').valueOf()
+    );
 
-        const transactions: Transaction[] = account.getTransactions();
+    const account = new Account();
+    account.deposit(100);
+    account.withdraw(10);
 
-        expect(transactions).toEqual(expectedTransactions)
-    });
+    const transactions: Transaction[] = account.getTransactions();
+
+    expect(transactions).toEqual(expectedTransactions)
+  });
 });
