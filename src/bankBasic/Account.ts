@@ -1,10 +1,10 @@
 export class Transaction {
   private amount: number;
-  private date: number;
+  private transactionTimestamp: number;
 
-  constructor(amount: number, date: number) {
+  constructor(amount: number, transactionTimestamp: number) {
     this.amount = amount;
-    this.date = date;
+    this.transactionTimestamp = transactionTimestamp;
   }
   getAmount(): number {
     return this.amount;

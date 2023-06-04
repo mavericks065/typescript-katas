@@ -21,13 +21,13 @@ describe("When having an account", () => {
   });
   it('should be able to return the list of transactions', () => {
     const expectedTransactions = [
-      new Transaction(100, new Date('2023-05-05').valueOf()),
-      new Transaction(-10, new Date('2023-05-06').valueOf()),
+      new Transaction(100, new Date('2023-05-05T12:23:43.450').valueOf()),
+      new Transaction(-10, new Date('2023-05-06T12:32:43.450').valueOf()),
     ];
     jest.spyOn(global.Date, 'now').mockImplementationOnce(() =>
-      new Date('2023-05-05').valueOf()
+      new Date('2023-05-05T12:23:43.450').valueOf()
     ).mockImplementationOnce(() =>
-      new Date('2023-05-06').valueOf()
+      new Date('2023-05-06T12:32:43.450').valueOf()
     );
 
     const account = new Account();
