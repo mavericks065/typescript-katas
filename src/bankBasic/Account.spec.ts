@@ -1,21 +1,22 @@
 import {Account, Transaction} from "./Account";
-import {NegativeBankServiceStub} from "./TestUtil";
+import {NegativeBankServiceStub, PositiveBankServiceStub} from "./TestUtil";
 
 describe("When having an account", () => {
   const bankService = new NegativeBankServiceStub();
+  const userId = 1;
   it("should be able to get the current balance", () => {
-    const account = new Account(bankService);
+    const account = new Account(userId, bankService);
     const balance = account.getBalance()
     expect(balance).toBe(0);
   });
   it('should be able to do a deposit and increase the current balance by the deposit', () => {
-    const account = new Account(bankService);
+    const account = new Account(userId, bankService);
     account.deposit(100);
     const balance = account.getBalance()
     expect(balance).toBe(100);
   });
   it('should be able to withdraw and decrease the balance of the account', () => {
-    const account = new Account(bankService);
+    const account = new Account(userId, bankService);
     account.deposit(100);
     account.withdraw(10);
     const balance = account.getBalance();
@@ -32,13 +33,26 @@ describe("When having an account", () => {
       new Date('2023-05-06T12:32:43.450').valueOf()
     );
 
-    const account = new Account(bankService);
+    const account = new Account(userId, bankService);
     account.deposit(100);
     account.withdraw(10);
 
     const transactions: Transaction[] = account.getTransactions();
 
     expect(transactions).toEqual(expectedTransactions)
+  });
+});
+describe("when withdrawing money", () => {
+  it('should call the bank webservice to check if user is allowed to withdraw ', function () {
+    const bankService = new PositiveBankServiceStub();
+    const userId = 1;
+
+    const account = new Account(userId, bankService);
+    account.deposit(100);
+    account.withdraw(10);
+    const balance = account.getBalance();
+
+    expect(balance).toEqual(100);
   });
 });
 

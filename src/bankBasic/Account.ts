@@ -8,7 +8,7 @@ export class Transaction {
 
 export class Account {
   private transactions: Transaction[] = [];
-  constructor(private bankService: BankService) {
+  constructor(private userId: number, private bankService: BankService) {
   }
 
   getBalance(): number {
