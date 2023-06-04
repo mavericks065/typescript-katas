@@ -1,19 +1,21 @@
 import {Account, Transaction} from "./Account";
+import {NegativeBankServiceStub} from "./TestUtil";
 
 describe("When having an account", () => {
+  const bankService = new NegativeBankServiceStub();
   it("should be able to get the current balance", () => {
-    const account = new Account();
+    const account = new Account(bankService);
     const balance = account.getBalance()
     expect(balance).toBe(0);
   });
   it('should be able to do a deposit and increase the current balance by the deposit', () => {
-    const account = new Account();
+    const account = new Account(bankService);
     account.deposit(100);
     const balance = account.getBalance()
     expect(balance).toBe(100);
   });
   it('should be able to withdraw and decrease the balance of the account', () => {
-    const account = new Account();
+    const account = new Account(bankService);
     account.deposit(100);
     account.withdraw(10);
     const balance = account.getBalance();
@@ -30,7 +32,7 @@ describe("When having an account", () => {
       new Date('2023-05-06T12:32:43.450').valueOf()
     );
 
-    const account = new Account();
+    const account = new Account(bankService);
     account.deposit(100);
     account.withdraw(10);
 
@@ -39,3 +41,4 @@ describe("When having an account", () => {
     expect(transactions).toEqual(expectedTransactions)
   });
 });
+

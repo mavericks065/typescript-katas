@@ -1,10 +1,5 @@
 export class Transaction {
-  private amount: number;
-  private transactionTimestamp: number;
-
-  constructor(amount: number, transactionTimestamp: number) {
-    this.amount = amount;
-    this.transactionTimestamp = transactionTimestamp;
+  constructor(private amount: number, private transactionTimestamp: number) {
   }
   getAmount(): number {
     return this.amount;
@@ -13,6 +8,8 @@ export class Transaction {
 
 export class Account {
   private transactions: Transaction[] = [];
+  constructor(private bankService: BankService) {
+  }
 
   getBalance(): number {
     if (this.transactions.length === 0) {
