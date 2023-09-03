@@ -12,8 +12,4 @@ export class Match {
         this.roundsWon1 = roundsWon1;
         this.roundsWon2 = roundsWon2;
     }
-
-    getWinner(): string {
-        return this.roundsWon1 > this.roundsWon2 ? this.home : this.away;
-    }
 }

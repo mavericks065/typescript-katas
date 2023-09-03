@@ -18,6 +18,5 @@ describe("For a season", () => {
         // then
         expect(matches.length).toEqual(66);
         expect(matches[0]).toEqual(expectedMatch);
-        expect(matches[0].getWinner()).toBe("blanka");
     });
 });

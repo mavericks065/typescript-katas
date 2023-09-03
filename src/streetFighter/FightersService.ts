@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-interface Fighter {
+export interface Fighter {
     id: number;
     firstname: string;
     lastname: string | null;
@@ -16,13 +16,13 @@ export class FighterService {
         return jsonData;
     };
 
-    getFighters = (): Record<number, Fighter> => {
+    getFighters = (): Record<string, Fighter> => {
         const jsonFilePath = path.resolve("src/streetFighter/sources/getFcaApiFighters.json");
         const fightersArr: Array<Fighter> = this.parseJsonFile(jsonFilePath);
 
-        const fighters: Record<number, Fighter> = {};
+        const fighters: Record<string, Fighter> = {};
         fightersArr.forEach(fighter => {
-            fighters[fighter.id] = fighter
+            fighters[fighter.firstname] = fighter
         })
 
         return fighters;
